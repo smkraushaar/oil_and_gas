@@ -14,7 +14,7 @@ library(tidyverse)
 library(randomForest)
 gallup_data$col<-0
 View(gallup_data)
-##binning the EUR data 
+##binning the EUR (estimated ultimate recovery) data. 40 BBL per ft of lateral is econmic cutoff at $75/BBL oil price
 gallup_data$col[gallup_data$EUR_FT <= 40] <-0 
 gallup_data$col[gallup_data$EUR_FT> 40] <-1 
 
