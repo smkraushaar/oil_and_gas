@@ -1,0 +1,59 @@
+##Loading new data
+####Change File Path to your file pathdata ,
+wd <- "C:\\Users\\Juniper Resources\\Desktop\\r\\Gallup"
+setwd(wd)
+getwd()
+###Make a CSV from your data called data.csv OR name it something else but make sure to change "data.csv"
+gallup_data <- read.csv("gallup7.10.csv")
+View(gallup_data)
+##Plotting Random Forest
+library(tidyverse)
+#random forest
+#need to load tidyverse
+library(tidyverse)
+library(randomForest)
+gallup_data$col<-0
+View(gallup_data)
+##binning the EUR data 
+gallup_data$col[gallup_data$EUR_FT <= 40] <-0 
+gallup_data$col[gallup_data$EUR_FT> 40] <-1 
+
+
+##splitting data into training and test
+library(caTools)
+ind<-sample.split(Y = gallup_data$col,SplitRatio = 0.7)
+#set the seed
+set.seed(101)
+sample = sample.split(gallup_data$col, SplitRatio = 0.7)
+gallup.train = subset(gallup_data, sample == TRUE)
+gallup.test = subset(gallup_data, sample == FALSE)
+
+##Random forest plotting 
+set.seed(101)
+  fit_g <-randomForest(as.factor(col) ~ PROP + PROP_FT + PERF + AVG_IND + AVG_DPHI + AVG_GR + IND_RHOB + SOPHIH + AVG_SWI + GROSS + MAX_DPHI + MAX_IND + MAX_SWI + MAX_SWS + NET_DPHI_6 + MNCS4_GALLUP + MNCS4_GLLP_1 + MNCS4_GLLP_2 + NET_GR_G110 + NET_FT_GR_L110 + NET_FT_IND_G_10, 
+                       data=gallup.train, importance=TRUE, ntree=6500)
+  varImpPlot(fit_g)
+  Prediction <-predict(fit_g, gallup.test)
+  #adding prediction column to test dataset
+  gallup_prediction_test<- transform(gallup.test, predict=Prediction)
+  #seeing how well the model works 
+  gallup_prediction_test<-gallup_prediction_test %>% 
+    mutate(success=if_else(col==predict, 1, 0))
+  View(gallup_prediction_test)
+  #determining success - 60 is number of variables
+  sum(gallup_prediction_test$success)/60*100
+##writing data to csv
+write.csv(gallup_prediction_test, file="C://Users//Juniper Resources//Desktop//data_prediction.csv")
+
+
+Success rate: 83.6%
+
+##Loading test dataset of vertical wells 
+vert_data <- read.csv("vert_data.csv")
+Prediction2 <-predict(fit_g,vert_data)
+vert_data$col<-0
+View(vert_data)
+vert_data$predict<-Prediction2
+write.csv(vert_data, file="C://Users//Juniper Resources//Desktop//gallup_vert_prediction.csv")
+
+
