@@ -1,8 +1,8 @@
 # oil_and_gas
-# Heel code - trying to locate the exact point of inflection from vertical to horizontal in a well, and trying to predict if a well is toe-up or toe-down.
+## Heel code - trying to locate the exact point of inflection from vertical to horizontal in a well, and trying to predict if a well is toe-up or toe-down.
 
 ##Random Forest Model Steps for Predicting Economic Oil Wells:
-##1.	Collect geologic property grids for 1 zone in Petra using petrophysical logs from vertical wells (resistivity, DPHI, net pay, water saturation, gross thickness, etc) 
+1.	Collect geologic property grids for 1 zone in Petra using petrophysical logs from vertical wells (resistivity, DPHI, net pay, water saturation, gross thickness, etc) 
 ##a.	This is the most difficult step.
 ##2.	Sample the grids to the horizontal wells drilled in the specific geologic zone of interest
 ##3.	Export the dataset of horizontal wells, and associated geologic properties
