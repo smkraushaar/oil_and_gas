@@ -1,5 +1,7 @@
 # oil_and_gas
 
+This post contains R code for using a random forest model to predict economic oil wells.  Please note - the data used in the model is propietary so I could not include it. 
+
 ##Random Forest Model Steps for Predicting Economic Oil Wells:
 1.	Collect geologic property grids for 1 zone in Petra using petrophysical logs from vertical wells (resistivity, DPHI, net pay, water saturation, gross thickness, etc) 
 a.	This is the most difficult step.
