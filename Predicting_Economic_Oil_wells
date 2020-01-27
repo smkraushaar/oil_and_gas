@@ -1,6 +1,6 @@
 ##Loading new data
 ####Change File Path to your file pathdata ,
-wd <- "C:\\Users\\Juniper Resources\\Desktop\\r\\Gallup"
+wd <- "C:\\set your directory here"
 setwd(wd)
 getwd()
 ###Make a CSV from your data called data.csv OR name it something else but make sure to change "data.csv"
@@ -43,7 +43,7 @@ set.seed(101)
   #determining success - 60 is number of variables
   sum(gallup_prediction_test$success)/60*100
 ##writing data to csv
-write.csv(gallup_prediction_test, file="C://Users//Juniper Resources//Desktop//data_prediction.csv")
+write.csv(gallup_prediction_test, file="C://set your directory here")
 
 
 Success rate: 83.6%
